@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6134cad6cba149b0ac16ea454c738d09" Name="Diagram1">
+        <EntityTypeShape EntityType="SiteGenerator.CSS_GEN" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="SiteGenerator.CSS_HTML" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="SiteGenerator.HTML_ATTR" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="SiteGenerator.HTML_GEN" Width="1.5" PointX="0.75" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="SiteGenerator.FK__CSS_HTML__PROPER__6383C8BA" ManuallyRouted="false" />
+        <AssociationConnector Association="SiteGenerator.FK__CSS_HTML__TAG_NA__6477ECF3" ManuallyRouted="false" />
+        <AssociationConnector Association="SiteGenerator.FK__HTML_ATTR__TAG__5EBF139D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

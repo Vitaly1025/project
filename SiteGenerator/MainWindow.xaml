@@ -1,0 +1,102 @@
+﻿<Window
+    x:Class="SiteGenerator.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SiteGenerator"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="Генератор сайтов"
+    Width="auto"
+    Height="720"
+    MinWidth="900"
+    MinHeight="450"
+    Icon="Resources/Icons/favicon.png"
+    WindowStartupLocation="CenterScreen"
+    mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary Source="Resources\Style.xaml" />
+    </Window.Resources>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="0,8*" />
+            <ColumnDefinition Width="0,2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid
+            Grid.Row="0"
+            Grid.RowSpan="2"
+            Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel x:Name="ElementsControlFirst" Background="#616161">
+                <Button
+                    Click="CreateProject_Click"
+                    Content="Создать проект"
+                    Style="{StaticResource Firstbutton}" />
+                <Button
+                    Click="OpenProject_Click"
+                    Content="Открыть проект"
+                    Style="{StaticResource baseButton}" />
+                <Button
+                    Click="About_Click"
+                    Content="О приложении"
+                    Style="{StaticResource baseButton}" />
+                <Button
+                    Click="Exit_Click"
+                    Content="Выход"
+                    Style="{StaticResource baseButton}" />
+            </StackPanel>
+            <StackPanel
+                x:Name="ElementsControlSecond"
+                Background="#616161"
+                Visibility="Hidden">
+                <UniformGrid Name="buf">
+                    <TreeView Name="node" Style="{StaticResource TreeViewStyle}">
+                        <TreeView.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Click="AddClick" Header="Добавить элемент" Name="AddElements"/>
+                                <MenuItem Click="RemoveClick" Header="Удалить элемент" />
+                                <MenuItem Click="ChangeClick" Header="Обновить" />
+                                <MenuItem Click="InnerText" Header="Зафиксировать текст"/>
+                            </ContextMenu>
+                        </TreeView.ContextMenu>
+                    </TreeView>
+                </UniformGrid>
+
+                <UniformGrid Columns="1" Name="attributes">
+                </UniformGrid>
+            </StackPanel>
+        </Grid>
+        <StackPanel
+            x:Name="Stack"
+            Grid.ColumnSpan="4"
+            Visibility="Hidden">
+         
+        </StackPanel>
+        <Grid
+            x:Name="Grid"
+            Grid.Row="0"
+            Grid.Column="2"
+            Visibility="Hidden">
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="50,20,0,10" Content="Сохранить изменения и обновить"  Click="ChangeClick"/>
+                <Button Margin="50,20,0,10" Content="Открыть в браузере" Click="Browser_Open" />
+            </StackPanel>
+        </Grid>
+        <Grid Grid.RowSpan="2" Grid.Column="3">
+            <UniformGrid Columns="1">
+                <ToolBar x:Name="Tool" Visibility="Hidden" />
+                <TextBox Name="Editor" Visibility="Hidden"/>
+            </UniformGrid>
+        </Grid>
+        <Grid
+            x:Name="Web_browser"
+            Grid.Row="1"
+            Grid.Column="2">
+            <WebBrowser Name="web"/>
+        </Grid>
+    </Grid>
+</Window>

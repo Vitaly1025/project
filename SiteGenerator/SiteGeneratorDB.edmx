@@ -1,0 +1,256 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище SiteGenerator" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CSS_GEN">
+          <Key>
+            <PropertyRef Name="PROPERTY_NAME" />
+          </Key>
+          <Property Name="PROPERTY_NAME" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="TYPE_ROW" Type="int" Nullable="false" />
+          <Property Name="DISCRIPTION_CSS" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CSS_HTML">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PROPERTY_NAME" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="TAG_NAME" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HTML_ATTR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TAG" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="NAME_ATTR" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HTML_GEN">
+          <Key>
+            <PropertyRef Name="TAG" />
+          </Key>
+          <Property Name="TAG" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="POSITION" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="DISCRIPTION_TAG" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__CSS_HTML__PROPER__6383C8BA">
+          <End Role="CSS_GEN" Type="Self.CSS_GEN" Multiplicity="1" />
+          <End Role="CSS_HTML" Type="Self.CSS_HTML" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSS_GEN">
+              <PropertyRef Name="PROPERTY_NAME" />
+            </Principal>
+            <Dependent Role="CSS_HTML">
+              <PropertyRef Name="PROPERTY_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CSS_HTML__TAG_NA__6477ECF3">
+          <End Role="HTML_GEN" Type="Self.HTML_GEN" Multiplicity="1" />
+          <End Role="CSS_HTML" Type="Self.CSS_HTML" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HTML_GEN">
+              <PropertyRef Name="TAG" />
+            </Principal>
+            <Dependent Role="CSS_HTML">
+              <PropertyRef Name="TAG_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HTML_ATTR__TAG__5EBF139D">
+          <End Role="HTML_GEN" Type="Self.HTML_GEN" Multiplicity="1" />
+          <End Role="HTML_ATTR" Type="Self.HTML_ATTR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HTML_GEN">
+              <PropertyRef Name="TAG" />
+            </Principal>
+            <Dependent Role="HTML_ATTR">
+              <PropertyRef Name="TAG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище SiteGeneratorContainer">
+          <EntitySet Name="CSS_GEN" EntityType="Self.CSS_GEN" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CSS_HTML" EntityType="Self.CSS_HTML" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HTML_ATTR" EntityType="Self.HTML_ATTR" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HTML_GEN" EntityType="Self.HTML_GEN" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CSS_HTML__PROPER__6383C8BA" Association="Self.FK__CSS_HTML__PROPER__6383C8BA">
+            <End Role="CSS_GEN" EntitySet="CSS_GEN" />
+            <End Role="CSS_HTML" EntitySet="CSS_HTML" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CSS_HTML__TAG_NA__6477ECF3" Association="Self.FK__CSS_HTML__TAG_NA__6477ECF3">
+            <End Role="HTML_GEN" EntitySet="HTML_GEN" />
+            <End Role="CSS_HTML" EntitySet="CSS_HTML" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HTML_ATTR__TAG__5EBF139D" Association="Self.FK__HTML_ATTR__TAG__5EBF139D">
+            <End Role="HTML_GEN" EntitySet="HTML_GEN" />
+            <End Role="HTML_ATTR" EntitySet="HTML_ATTR" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SiteGenerator" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CSS_GEN">
+          <Key>
+            <PropertyRef Name="PROPERTY_NAME" />
+          </Key>
+          <Property Name="PROPERTY_NAME" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TYPE_ROW" Type="Int32" Nullable="false" />
+          <Property Name="DISCRIPTION_CSS" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CSS_HTML" Relationship="Self.FK__CSS_HTML__PROPER__6383C8BA" FromRole="CSS_GEN" ToRole="CSS_HTML" />
+        </EntityType>
+        <EntityType Name="CSS_HTML">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PROPERTY_NAME" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="TAG_NAME" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CSS_GEN" Relationship="Self.FK__CSS_HTML__PROPER__6383C8BA" FromRole="CSS_HTML" ToRole="CSS_GEN" />
+          <NavigationProperty Name="HTML_GEN" Relationship="Self.FK__CSS_HTML__TAG_NA__6477ECF3" FromRole="CSS_HTML" ToRole="HTML_GEN" />
+        </EntityType>
+        <EntityType Name="HTML_ATTR">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TAG" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NAME_ATTR" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HTML_GEN" Relationship="Self.FK__HTML_ATTR__TAG__5EBF139D" FromRole="HTML_ATTR" ToRole="HTML_GEN" />
+        </EntityType>
+        <EntityType Name="HTML_GEN">
+          <Key>
+            <PropertyRef Name="TAG" />
+          </Key>
+          <Property Name="TAG" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="POSITION" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DISCRIPTION_TAG" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CSS_HTML" Relationship="Self.FK__CSS_HTML__TAG_NA__6477ECF3" FromRole="HTML_GEN" ToRole="CSS_HTML" />
+          <NavigationProperty Name="HTML_ATTR" Relationship="Self.FK__HTML_ATTR__TAG__5EBF139D" FromRole="HTML_GEN" ToRole="HTML_ATTR" />
+        </EntityType>
+        <Association Name="FK__CSS_HTML__PROPER__6383C8BA">
+          <End Role="CSS_GEN" Type="Self.CSS_GEN" Multiplicity="1" />
+          <End Role="CSS_HTML" Type="Self.CSS_HTML" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CSS_GEN">
+              <PropertyRef Name="PROPERTY_NAME" />
+            </Principal>
+            <Dependent Role="CSS_HTML">
+              <PropertyRef Name="PROPERTY_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CSS_HTML__TAG_NA__6477ECF3">
+          <End Role="HTML_GEN" Type="Self.HTML_GEN" Multiplicity="1" />
+          <End Role="CSS_HTML" Type="Self.CSS_HTML" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HTML_GEN">
+              <PropertyRef Name="TAG" />
+            </Principal>
+            <Dependent Role="CSS_HTML">
+              <PropertyRef Name="TAG_NAME" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HTML_ATTR__TAG__5EBF139D">
+          <End Role="HTML_GEN" Type="Self.HTML_GEN" Multiplicity="1" />
+          <End Role="HTML_ATTR" Type="Self.HTML_ATTR" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HTML_GEN">
+              <PropertyRef Name="TAG" />
+            </Principal>
+            <Dependent Role="HTML_ATTR">
+              <PropertyRef Name="TAG" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SiteGeneratorContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CSS_GEN" EntityType="Self.CSS_GEN" />
+          <EntitySet Name="CSS_HTML" EntityType="Self.CSS_HTML" />
+          <EntitySet Name="HTML_ATTR" EntityType="Self.HTML_ATTR" />
+          <EntitySet Name="HTML_GEN" EntityType="Self.HTML_GEN" />
+          <AssociationSet Name="FK__CSS_HTML__PROPER__6383C8BA" Association="Self.FK__CSS_HTML__PROPER__6383C8BA">
+            <End Role="CSS_GEN" EntitySet="CSS_GEN" />
+            <End Role="CSS_HTML" EntitySet="CSS_HTML" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CSS_HTML__TAG_NA__6477ECF3" Association="Self.FK__CSS_HTML__TAG_NA__6477ECF3">
+            <End Role="HTML_GEN" EntitySet="HTML_GEN" />
+            <End Role="CSS_HTML" EntitySet="CSS_HTML" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HTML_ATTR__TAG__5EBF139D" Association="Self.FK__HTML_ATTR__TAG__5EBF139D">
+            <End Role="HTML_GEN" EntitySet="HTML_GEN" />
+            <End Role="HTML_ATTR" EntitySet="HTML_ATTR" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище SiteGeneratorContainer" CdmEntityContainer="SiteGeneratorContext">
+          <EntitySetMapping Name="CSS_GEN">
+            <EntityTypeMapping TypeName="SiteGenerator.CSS_GEN">
+              <MappingFragment StoreEntitySet="CSS_GEN">
+                <ScalarProperty Name="PROPERTY_NAME" ColumnName="PROPERTY_NAME" />
+                <ScalarProperty Name="TYPE_ROW" ColumnName="TYPE_ROW" />
+                <ScalarProperty Name="DISCRIPTION_CSS" ColumnName="DISCRIPTION_CSS" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CSS_HTML">
+            <EntityTypeMapping TypeName="SiteGenerator.CSS_HTML">
+              <MappingFragment StoreEntitySet="CSS_HTML">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PROPERTY_NAME" ColumnName="PROPERTY_NAME" />
+                <ScalarProperty Name="TAG_NAME" ColumnName="TAG_NAME" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HTML_ATTR">
+            <EntityTypeMapping TypeName="SiteGenerator.HTML_ATTR">
+              <MappingFragment StoreEntitySet="HTML_ATTR">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="TAG" ColumnName="TAG" />
+                <ScalarProperty Name="NAME_ATTR" ColumnName="NAME_ATTR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HTML_GEN">
+            <EntityTypeMapping TypeName="SiteGenerator.HTML_GEN">
+              <MappingFragment StoreEntitySet="HTML_GEN">
+                <ScalarProperty Name="TAG" ColumnName="TAG" />
+                <ScalarProperty Name="POSITION" ColumnName="POSITION" />
+                <ScalarProperty Name="DISCRIPTION_TAG" ColumnName="DISCRIPTION_TAG" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

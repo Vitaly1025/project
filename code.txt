@@ -1,0 +1,109 @@
+Create DATABASE SiteGenerator;
+
+USE SiteGenerator;
+
+Create Table HTML_GEN
+(
+	ID_HTML			INT					IDENTITY PRIMARY KEY,
+	TAG				VARCHAR(15)			NOT NULL,
+	ID_NAME			VARCHAR(10)			NULL,
+	VALUE			VARCHAR(255)		NULL,
+	DISCRIPTION_TAG VARCHAR(50)			NULL
+);
+
+Create Table CSS_GEN
+(
+	ID_CSS				INT				IDENTITY PRIMARY KEY,
+	PROPERTY_NAME		VARCHAR(15)		NOT NULL,
+	PROPERTY_VALUE		VARCHAR(10)	    NULL,
+	DISCRIPTION_CSS		VARCHAR(50)		NULL
+);	
+
+Create Table CSS_HTML
+(
+	ID					INT				IDENTITY PRIMARY KEY,
+	ID_HTML				INT			not null	FOREIGN KEY REFERENCES HTML_GEN(ID_HTML),
+	ID_CSS				INT			not null	FOREIGN KEY REFERENCES CSS_GEN(ID_CSS)  
+);
+	
+	DROP TABLE CSS_HTML;
+	DROP TABLE CSS_GEN;
+	DROP TABLE HTML_GEN;
+
+INSERT INTO HTML_GEN (TAG,ID_NAME,VALUE,DISCRIPTION_TAG)
+VALUES
+('div','','','Создать контейнер'),
+('h1','','','Создать заголовок 1-го уровня'),
+('h2','','','Создать заголовок 2-го уровня'),
+('h3','','','Создать заголовок 3-го уровня'),
+('h4','','','Создать заголовок 4-го уровня'),
+('h5','','','Создать заголовок 5-го уровня'),
+('p','','','Создать абзац'),
+('img','','','Вставить изображение'),
+('a','','','Создать ссылку'),
+('li','','',''),
+('ul','','','Создать список'),
+('hr','','','Горизонтальный разделитель');
+
+INSERT INTO CSS_GEN(PROPERTY_NAME,PROPERTY_VALUE,DISCRIPTION_CSS)
+VALUES
+('width','',''),
+('height','',''),
+('color','',''),
+('background','',''),
+('align','',''),
+('z-index','',''),
+('font-size','',''),
+('font-family','',''),
+('src','',''),
+('link','',''),
+('text-decoration','','');
+
+DELETE CSS_HTML;
+
+INSERT INTO CSS_HTML(TAG_NAME,PROPERTY_NAME)
+VALUES
+('div','width'),
+('div','height'),
+('div','background'),
+('div','z-index'),
+('h1','align'),
+('h1','color'),
+('h1','background'),
+('h2','align'),
+('h2','color'),
+('h2','background'),
+('h3','align'),
+('h3','color'),
+('h3','background'),
+('h4','align'),
+('h4','color'),
+('h4','background'),
+('h5','align'),
+('h5','color'),
+('h5','align'),
+('p','color'),
+('p','background'),
+('p','font-size'),
+('p','font-family'),
+('img','src'),
+('a','link'),
+('a','color'),
+('li','text-decoration'),
+('li','color'),
+('li','background')
+
+INSERT INTO CSS_HTML(TAG_NAME,PROPERTY_NAME)
+VALUES
+('div','width'),
+('div','width'),
+('div','width'),
+('div','width'),
+('div','width'),
+('div','width'),
+('div','width'),
+('div','width'),
+('div','width'),
+('div','width'),
+('div','width'),
+('div','width');
